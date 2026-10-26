@@ -8,6 +8,9 @@ int main(int argc, char* args[])
 {
 	Day2 day2;
 
+	//capturing the return value
+	int width = Console::GetWindowWidth();
+
 	int menuSelection = 0;
 	std::vector<std::string> menuOptions{
 		"1. Part A-1.0: Calling static methods",
@@ -42,6 +45,9 @@ int main(int argc, char* args[])
 			//  Experiment with changing the colors.
 			//  Open the Console.h file (look in Misc/Console in Solution Explorer) to see how the methods are declared.
 			//
+			Console::Write("Batman is AWESOME!");
+			Console::WriteLine("\tAquaman smells like fish.", ConsoleColor::Green);
+			Console::WriteLine("Superman is an ALIEN!", ConsoleColor::Red);
 			break;
 		}
 		case 2:

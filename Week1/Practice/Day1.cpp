@@ -242,11 +242,15 @@ void Day1::PartA_1_3()
 
 			//
 			//Part A-1.3: move player to a predefined Target spot 
-			//      get target variable's location (col and row fields) EX: target.col
-			//      the player is at col 1 and row 1
 			//      use the move methods of the player
 			// 		HINT: explore the Player.h file to see what methods could be used.
 			//
+			for (int i = 0; i < 5; i++)
+			{
+				player.MoveDown();
+				player.MoveRight();
+			}
+			player.MoveRight();
 
 
 			while (!quit)

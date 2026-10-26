@@ -473,3 +473,10 @@ void Player::AddRedo(const std::string& action)
 	//insert the item to the front of the redo_ vector
 	redo_.insert(redo_.begin(), action);
 }
+
+//define the function
+void Player::WhereAmI()
+{
+	//method body
+	std::cout << xPosition_ << "," << yPosition_ << "\n";
+}

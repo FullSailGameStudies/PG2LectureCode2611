@@ -48,6 +48,8 @@ public:
 
 	int Size() { return static_cast<int>(width_ * scale_); }
 
+	void WhereAmI(); //a declaration
+
 	void AddUndo(const std::string& action);
 	void AddRedo(const std::string& action);
 

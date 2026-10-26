@@ -91,6 +91,9 @@ int main(int argc, char* args[])
 			//	Print the age that the user enters.
 			//	Open the Input.h file(look in Misc / Input in Solution Explorer) to see how the GetInteger is declared.
 			//
+			int age = Input::GetInteger("What is your age?", 0, 120);
+			Console::Write("Your age is ");
+			Console::WriteLine(age, ConsoleColor::Yellow, ConsoleColor::Cyan);
 			break;
 		}
 		case 7:

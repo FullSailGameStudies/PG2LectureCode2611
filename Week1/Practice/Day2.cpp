@@ -7,10 +7,36 @@
 //
 // Part B-1.1: Add a method definition for SpawnZombies
 //
+void Day2::SpawnZombies(PG2Graphics& engine, std::vector<Zombie>& zeeks, Player& playa)
+{
+	int x, y;
+	int pX, pY;
+	pX = playa.GetXPosition();
+	pY = playa.GetYPosition();
+	for (int i = 0; i < 5; i++)
+	{
+		do
+		{
+			x = rand() % 10;
+			y = rand() % 10;
+		} while (x == pX and y == pY);
+
+		Zombie zomb(&engine, 0.5f, x, y); // NOTE: 0.5f is the scale
+		zeeks.push_back(zomb);
+	}
+}
+
 
 //
 // Part B-2.1: Add a method definition for RenderZombies
 //
+void Day2::RenderZombies(const std::vector<Zombie>& zeeks) const
+{
+	for (const Zombie& zeek : zeeks)
+	{
+		zeek.Render();
+	}
+}
 
 //
 // Part B-3.1: Add a method definition for EraseZombies
@@ -62,6 +88,7 @@ void Day2::PartB(int option)
 			//
 			// Part B-1.3 Call SpawnZombies
 			//
+			SpawnZombies(engine, mobs, player);
 
 			bool quit = false;
 			SDL_Event e;
@@ -91,6 +118,7 @@ void Day2::PartB(int option)
 							//
 							// Part B-1.3 Call SpawnZombies
 							//
+							SpawnZombies(engine, mobs, player);
 						}
 					}
 				}
@@ -102,6 +130,7 @@ void Day2::PartB(int option)
 				//
 				// Part B-2.3 call RenderZombies
 				//
+				RenderZombies(mobs);
 
 
 				player.Render();

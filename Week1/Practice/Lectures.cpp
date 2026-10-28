@@ -4,9 +4,58 @@
 #include <Console.h>
 #include <Input.h>
 
+//int Factor(int num)//pass by value (COPY)
+//{
+//	num *= 3;
+//	return num;
+//}
+//PASS BY REFERENCE:
+//when to use:
+//  1) another scope needs to access my variable
+//  2) prevent a copy (performance)
+
+//my RULES: 
+//  if the parameter is a class, pass by ref
+//  if I want the function to update my variable, pass by ref
+void Factor(int& num)//pass by ref (ALIAS)
+{
+	num *= 3;
+}
+
+const float PI = 3.1415f;
+
+void Stats(const std::vector<int>& numbers, int& avg, int& min, int& max)
+{
+	int sum = 0;
+	min = INT_MAX;
+	max = INT_MIN;
+	//range-base (foreach)
+	for (auto& number : numbers)
+	{
+		sum += number;
+		if (number < min) min = number;
+		max = std::max(max, number);
+	}
+	avg = sum / numbers.size();
+}
 int main(int argc, char* args[])
 {
 	Day2 day2;
+	std::vector<int> nummies;
+	for (int i = 0; i < 100; i++)
+	{
+		nummies.push_back(rand());
+	}
+	int average, minimum, maximum;
+	Stats(nummies, average, minimum, maximum);
+	std::cout << "Average: " << average << "\tMinimum: " << minimum;
+	std::cout << "\tMaximum: " << maximum << "\n";
+
+	int nummy = 5;
+	Factor(nummy);
+	int& numRef = nummy;
+	numRef += 5;
+	std::cout << nummy << "\n";
 
 	//capturing the return value
 	int width = Console::GetWindowWidth();

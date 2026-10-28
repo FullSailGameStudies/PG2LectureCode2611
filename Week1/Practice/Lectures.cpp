@@ -38,14 +38,68 @@ void Stats(const std::vector<int>& numbers, int& avg, int& min, int& max)
 	}
 	avg = sum / numbers.size();
 }
+void Print(const std::vector<int>& nums)
+{
+	for (int i = 0; i < nums.size(); i++)
+	{
+		std::cout << nums[i] << " ";
+	}
+	std::cout << "\n";
+}
 int main(int argc, char* args[])
 {
 	Day2 day2;
-	std::vector<int> nummies;
-	for (int i = 0; i < 100; i++)
+	std::vector<int> nummies{ 2,2,1,3,2,2,2,4 };
+	//an iterator is an OBJECT that "points" to
+	//an item in the container
+	//it knows how to move through the container
+	//iterator functions:
+	// vector.begin() - iterator to the first item
+	// vector.end() - iterator to the item AFTER the last item??????????
+	//nummies.erase(2);//erase requires an iterator
+	for (std::vector<int>::iterator it = nummies.begin(); it != nummies.end(); it++)
+	{
+		//"dereference" the iterator with `*`
+		std::cout << *it << "\n";
+	}
+	//need an iterator to '1' which is the 2 index
+	//begin() + index
+	nummies.erase(nummies.begin() + 2);
+	//{ 2,2,3,2,2,2,4,4 }
+	Print(nummies);
+	for (int i = 0; i < nummies.size(); i++)
+	{
+		if (nummies[i] == 2)
+		{
+			nummies.erase(nummies.begin() + i);
+			i--;//when erasing, decrement i
+		}
+	}
+	//OR...
+	for (int i = 0; i < nummies.size(); )
+	{
+		if (nummies[i] == 2)
+		{
+			nummies.erase(nummies.begin() + i);
+		}
+		else
+			i++;//only increment when you don't erase
+	}
+	//OR...
+	//reverse for loop
+	for (int i = nummies.size() - 1; i >= 0; i--)
+	{
+		if (nummies[i] == 2)
+		{
+			nummies.erase(nummies.begin() + i);
+		}
+	}
+	Print(nummies);
+
+	/*for (int i = 0; i < 100; i++)
 	{
 		nummies.push_back(rand());
-	}
+	}*/
 	int average, minimum, maximum;
 	Stats(nummies, average, minimum, maximum);
 	std::cout << "Average: " << average << "\tMinimum: " << minimum;

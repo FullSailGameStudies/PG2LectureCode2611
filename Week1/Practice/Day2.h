@@ -26,6 +26,7 @@ private:
 	//
 	// Part B-3.1: Add a method declaration for EraseZombies
 	//
+	int KillZombies(std::vector<Zombie>& zeeks, const Player& playa) const;
 
 };
 

@@ -38,13 +38,22 @@ void Stats(const std::vector<int>& numbers, int& avg, int& min, int& max)
 	}
 	avg = sum / numbers.size();
 }
-void Print(const std::vector<int>& nums)
+void Print(const std::vector<int>& nums, int top = 0)
 {
 	for (int i = 0; i < nums.size(); i++)
 	{
 		std::cout << nums[i] << " ";
 	}
 	std::cout << "\n";
+}
+void Info(const std::vector<int>& nums)
+{
+	//size() - how many items in the vector
+	//capacity() - how big the internal array is
+	//size <= capacity
+	//when size = capacity AND you add a new item, it must 
+	//resize the internal array
+	std::cout << nums.size() << "/" << nums.capacity() << "\n";
 }
 int main(int argc, char* args[])
 {
@@ -95,6 +104,21 @@ int main(int argc, char* args[])
 		}
 	}
 	Print(nummies);
+
+	std::vector<int> v2 = nummies;
+
+	auto v3(nummies);
+	//{0,1,2,3}
+	//{0,1,2,3,4}
+	std::vector<int> v4;
+	v4.reserve(10);//sets the capacity
+	Info(v4);// 0 / 0 ?  0 / 1? 0 / 1000?
+	for (int i = 0; i < 10; i++)
+	{
+		v4.push_back(rand());
+		Info(v4);
+	}
+
 
 	/*for (int i = 0; i < 100; i++)
 	{

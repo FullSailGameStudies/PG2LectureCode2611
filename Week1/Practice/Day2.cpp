@@ -7,13 +7,13 @@
 //
 // Part B-1.1: Add a method definition for SpawnZombies
 //
-void Day2::SpawnZombies(PG2Graphics& engine, std::vector<Zombie>& zeeks, Player& playa)
+void Day2::SpawnZombies(PG2Graphics& engine, std::vector<Zombie>& zeeks, Player& playa, int max)
 {
 	int x, y;
 	int pX, pY;
 	pX = playa.GetXPosition();
 	pY = playa.GetYPosition();
-	for (int i = 0; i < 5; i++)
+	for (int i = 0; i < max; i++)
 	{
 		do
 		{
@@ -130,7 +130,7 @@ void Day2::PartB(int option)
 								//
 								// Part B-3.3 Call KillZombies
 								//
-								int numKilled = KillZombies(mobs, player);
+								int numKilled = KillZombies(mobs, player);//& zeeks = mobs
 								std::cout << "Steve killed " << numKilled << " zombies! You monster!!\n";
 							}
 						}
@@ -140,7 +140,7 @@ void Day2::PartB(int option)
 							//
 							// Part B-1.3 Call SpawnZombies
 							//
-							SpawnZombies(engine, mobs, player);
+							SpawnZombies(engine, mobs, player, 10);
 						}
 					}
 				}

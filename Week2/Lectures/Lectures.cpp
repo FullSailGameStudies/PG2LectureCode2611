@@ -6,8 +6,24 @@
 #include <Input.h>
 
 
+void NamedBlockOfCode(int param)
+{
+	//ALL recursive functions REQUIRE an EXIT condition (base case)
+	//a way to exit the function
+	//exit conditions can be true or false
+	//you must have 1 or more exit conditions
+	//you must have 1 or more recursive cases
+	if(param < 100) //loop while this condition is true
+	{
+		std::cout << param << "\n";
+		NamedBlockOfCode(param + 1);//recursive case (causes a loop)
+		Console::WriteLine(param, ConsoleColor::Green);
+	}
+}
+
 int main(int argc, char* args[])
 {
+	NamedBlockOfCode(1);
 	srand(static_cast<unsigned int>(time(NULL)));
 
 	std::string hello = "Hello Week 2!";

@@ -8,5 +8,7 @@ public:
 	//
 	// Part A-2
 	//
+	//procedure bubbleSort(A : list of sortable items)
+	void bubbleSort(std::vector<Light>& A) const;
 };
 

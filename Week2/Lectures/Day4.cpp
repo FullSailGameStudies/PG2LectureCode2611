@@ -66,8 +66,22 @@ void Day4::RecursionExample()
 //
 // Part A-1.1
 //
+void Bats(int i = 0)
+{
+	if(i < 100)
+	{
+		std::cout << (char)78 << (char)65 << ' ';
+		//i++ and ++i?
+		//i++ - post-increment
+		//++i - pre-increment
+		Bats(i+1);
+	}
+}
+
 void Day4::PartA_1_1()
 {
+	//call Bats here
+	Bats();
 	char c[] = { '\n', 66, 65, 84, 77, 65, 78, 33, 33 };
 	for (auto ch : c) std::cout << ch;
 
@@ -177,6 +191,7 @@ void Day4::PartA_2()
 						//
 						// Lecture: after adding BubbleSort to the Sorter class, call BubbleSort here to sort the redLightsCopy vector
 						//
+						sorter.bubbleSort(redLightsCopy);
 
 						Map screenMap(engine.Renderer(), 10);
 						engine.ClearScreen(50, 50, 50, 255);

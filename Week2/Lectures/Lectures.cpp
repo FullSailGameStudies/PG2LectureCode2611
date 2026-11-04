@@ -4,6 +4,7 @@
 #include "Day5.h"
 #include "Day6.h"
 #include <Input.h>
+#include <map>
 
 
 void NamedBlockOfCode(int param)
@@ -32,6 +33,39 @@ int main(int argc, char* args[])
 		Console::Write(ch, (ConsoleColor)(rand() % 7 + 1));
 	}
 	std::cout << "\n";
+
+	std::map<std::string, float> menu;
+
+	//how to add items to a map:
+	//1) "easy" way  map[key] = value;
+	menu["Cheese Burger"] = 8.99f;
+	menu["French Fries"] = 4.50f;
+	menu["French Fries"] = 3.50f;//overwrites the value
+
+	//2) "not-as-easy" way map.insert(key-value pair);
+	std::pair< std::string, float> kvp =
+		std::make_pair("Special Sauce",0.50f);
+	menu.insert(kvp);//tries to insert into the map
+
+	//std::pair have 2 members: first and second
+	kvp.second = 0.25f;
+	//tries to insert into the map
+	auto itemInserted = menu.insert(kvp);
+	//will NOT overwrite
+	if (!itemInserted.second)
+	{
+		std::cout << kvp.first << " is already on the menu. Do you want to change the price?\n";
+	}
+	std::string menuItem = "Special Sauce";
+	//looks up the key and returns the value
+	float itemPrice = menu[menuItem];
+	std::cout << menuItem << " costs " << itemPrice << "\n";
+
+	menuItem = "Dino Nuggs";
+	//if it doesn't find it, it adds it!!!!
+	itemPrice = menu[menuItem];
+	std::cout << menuItem << " costs " << itemPrice << "\n";
+
 
 	int menuSelection = 0;
 	std::vector<std::string> menuOptions{

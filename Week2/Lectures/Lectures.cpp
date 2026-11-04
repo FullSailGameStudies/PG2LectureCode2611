@@ -22,6 +22,34 @@ void NamedBlockOfCode(int param)
 	}
 }
 
+void PrintWithIterator(const std::map<std::string, float>& menu)
+{
+	std::cout << "\n Bob's Burgers (iterators)\n";
+	for (auto it = menu.begin(); it != menu.end(); it++)
+	{
+		//it "points" to a key-value-pair object
+		//use ->first and ->second to access the parts of the pair
+		std::cout << (*it).first << " " << it->second << "\n";
+	}
+}
+
+void PrintWithForeach(const std::map<std::string, float>& menu)
+{
+	std::cout << "\n Bob's Burgers (foreach)\n";
+	for (auto& kvp : menu)
+	{
+		std::cout << kvp.first << " " << kvp.second << "\n";
+	}
+}
+void PrintWithStructuredBindings(const std::map<std::string, float>& menu)
+{
+	std::cout << "\n Bob's Burgers (Structured Bindings)\n";
+	for (auto& [itemName,itemPrice] : menu)
+	{
+		std::cout << itemName << " " << itemPrice << "\n";
+	}
+}
+
 int main(int argc, char* args[])
 {
 	NamedBlockOfCode(1);
@@ -63,9 +91,37 @@ int main(int argc, char* args[])
 
 	menuItem = "Dino Nuggs";
 	//if it doesn't find it, it adds it!!!!
-	itemPrice = menu[menuItem];
-	std::cout << menuItem << " costs " << itemPrice << "\n";
+	//itemPrice = menu[menuItem];
+	//std::cout << menuItem << " costs " << itemPrice << "\n";
+	//use "find" to lookup the key
+	//find returns an iterator!
+	//tries to find the key
+	//	returns an iterator to the found item
+	//  OR, 
+	//  if it doesn't find it, it returns the end() of the map
+	auto menuItemIterator = menu.find(menuItem);
+	if (menuItemIterator != menu.end())
+		std::cout << menuItem << " costs " << menuItemIterator->second << "\n";
+	else
+		std::cout << menuItem << " is not on the menu! Go to McDonald's\n";
 
+	menuItem = "Special Sauce"; 
+	menuItemIterator = menu.find(menuItem);
+	if (menuItemIterator != menu.end())
+	{
+		float oldPrice = menuItemIterator->second;
+		std::cout << menuItem << " used to costs " << oldPrice << "\n";
+		//update the value in the map
+		//1) use the map[key] = newValue;
+		//2) if you have an iterator, use the iterator->second = newValue;
+		//menuItemIterator->first = "Secret Sauce";
+		menuItemIterator->second *= 1.10f;
+		std::cout << "Now it costs " << menuItemIterator->second << "!!!\n";
+	}
+
+	PrintWithIterator(menu);
+	PrintWithForeach(menu);
+	PrintWithStructuredBindings(menu);
 
 	int menuSelection = 0;
 	std::vector<std::string> menuOptions{

@@ -157,6 +157,28 @@ void Day5::PartB_2(int section)
 			//
 			// TODO: (Lecture) Part B-2.2 loop over the std::map
 			//
+			//structured bindings
+			for (auto& [channel,channelLights] : groupedColors)
+			{
+				switch (channel)
+				{
+				case ColorChannel::RED:
+					std::cout << "RED: ";
+					break;
+				case ColorChannel::BLUE:
+					std::cout << "BLUE: ";
+					break;
+				case ColorChannel::GREEN:
+					std::cout << "GREEN: ";
+					break;
+				default:
+					break;
+				}
+				std::cout << channelLights.size() << "\n";
+
+				// the vectorOfLights comes from the map
+				grouper.DrawLights(screenMap, channelLights, columnRange, column, row);
+			}
 
 
 			//Update screen
@@ -195,6 +217,44 @@ void Day5::PartB_2(int section)
 			//
 			// TODO: (Lecture)  Part C-1 erasing from a std::map
 			//
+			foundBlues = groupedColors.find(ColorChannel::BLUE);
+			if (foundBlues == groupedColors.end()) //not found
+			{
+				std::cout << "There are no blue lights. how sad.\n";
+			}
+			else
+			{
+				int randoBlue = 256;// rand() % 256;//0-255  % num result is always 0-(num-1)
+				std::cout << "removing all blues less than " << randoBlue << "\n";
+
+				//a = b
+				//b = c + 1
+				//a = c + 1
+				// 
+				//loop over the vector
+				//the iterator POINTS to a key-value part that has 2 parts: first, second
+				//first is the key, second is the value
+				std::vector<Light>& blueLight = foundBlues->second;
+				int bluesErased = 0;
+				for (int i = blueLight.size() - 1; i >= 0; i--)//reverse for loop
+				{
+					if (blueLight[i].blue < randoBlue)
+					{
+						//erase in a vector requires an iterator
+						//get the iterator to the item at index `i`
+						auto vecIter = blueLight.begin() + i;
+						blueLight.erase(vecIter);
+						++bluesErased;
+					}
+				}
+
+				std::cout << "We erased " << bluesErased << " lights.\n";
+				if(blueLight.empty())// (blueLight.size() == 0)
+				{
+					//pass the iterator OR the key
+					groupedColors.erase(ColorChannel::BLUE);// foundBlues);
+				}
+			}
 
 
 			for (auto& [channel, channelLights] : groupedColors)

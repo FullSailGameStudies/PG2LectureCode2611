@@ -5,9 +5,13 @@
 #include "Day9.h"
 #include "Input.h"
 #include "Player.h"
+#include "Color.h"
 
 int main(int argc, char* args[])
 {
+	Color clr(255, 0, 0, 255);
+	clr.green = 127;
+
 	//initialize it when creating it
 	//EVERY class instance requires a constructor call
 	//p1 is an instance of the Player class

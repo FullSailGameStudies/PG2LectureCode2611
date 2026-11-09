@@ -3,6 +3,7 @@
 #include "Console.h"
 #include "Input.h"
 #include <GameTextures.h>
+#include <Card.h>
 
 
 /*              CLASSESS
@@ -51,17 +52,6 @@ void Day7::PartA_1()
     std::cout << "\n";
 
 
-	//
-	// TODO: Part A-1.1 Create a Card class
-	//
-	 
-	
-	//
-	// TODO: Part A-2.1 Create a Deck class
-	//
-
-
-
 	PG2Graphics engine(SCREEN_WIDTH, SCREEN_HEIGHT);
 	if (!engine.Init("Part A-1"))
 	{
@@ -103,6 +93,9 @@ void Day7::PartA_1()
 						//
 						// TODO: Part A-1.2 Create a Card object
 						//
+						Card cardyB("Q","Diamonds");
+						std::cout << cardyB.Value() << "\n";
+						cardyB.Print();
 
 
 						pos cardSize = GameTextures::CardSize(scale);
@@ -112,6 +105,7 @@ void Day7::PartA_1()
 						//
 						// TODO: Part A-1.3  call GameTextures::RenderImage with the Card object
 						//
+						GameTextures::RenderImage(cardyB.GetFace(), cardyB.GetSuit(), x, y);
 
 
 						//Update screen

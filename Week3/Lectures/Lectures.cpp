@@ -4,10 +4,18 @@
 #include "Day8.h"
 #include "Day9.h"
 #include "Input.h"
-
+#include "Player.h"
 
 int main(int argc, char* args[])
 {
+	//initialize it when creating it
+	//EVERY class instance requires a constructor call
+	//p1 is an instance of the Player class
+	Player p1("BruceW", 100);//calls the ctor
+	std::cout << "Player 1: " << 
+		p1.GetName() << " Level: " << 
+		p1.Level() << "\n";
+
     std::string hello = "Hello Week 3!";
     for (auto& ch : hello)
     {

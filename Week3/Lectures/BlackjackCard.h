@@ -8,7 +8,7 @@ public:
 	{
 
 	}
-
+	int Value() const override;
 
 private:
 };

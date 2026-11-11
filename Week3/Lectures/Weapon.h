@@ -8,7 +8,10 @@ private:
 public:
 	Weapon(int range, int damage);
 
-	void showMe();
+	//RUNTIME-polymorphism
+	//STEP 1: mark the base function as `virtual`
+	//	virtual tells the compiler that derived classes MIGHT override it
+	virtual void showMe();
 	int calcDamage();
 
 	int range() const

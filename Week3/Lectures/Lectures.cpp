@@ -6,9 +6,19 @@
 #include "Input.h"
 #include "Player.h"
 #include "Color.h"
+#include <Pistol.h>
 
 int main(int argc, char* args[])
 {
+	Pistol pewpew(100,250,15,50);
+	Pistol p2(100, 250, 5, 50);
+	int ammo = pewpew.Ammo();
+	pewpew = pewpew + p2;//pewpew+(p2)
+	pewpew = pewpew + 5;//pewpew+(5)
+	pewpew = p2;//calls the assignment operator
+
+	pewpew.showMe();
+
 	Color clr(255, 0, 0, 255);
 	clr.green = 127;
 

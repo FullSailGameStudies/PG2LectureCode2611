@@ -18,6 +18,9 @@ public:
 		mFuelLevel = mMaxFuelLevel;
 	}
 
+	//static functions:
+	//	there is NO 'this' parameter
+	//static functions can ONLY access other static members
 	static void reporting()
 	{
 		//std::cout << "Model year: " << mModelYear << "\n"; //ERROR! cannot access non-static members
@@ -40,6 +43,7 @@ public:
 	}
 
 private:
+	//non-static is object level (a copy of these per object)
 	int mModelYear;
 	std::string mModel;
 	std::string mMake;
@@ -47,6 +51,8 @@ private:
 	int mFuelLevel;
 	int mMaxFuelLevel;
 
+	//static is class level
+	//one for ALL objects
 	static int mNumberOfCarsMade; //shared by ALL cars
 };
 

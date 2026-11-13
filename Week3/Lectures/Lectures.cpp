@@ -8,6 +8,7 @@
 #include "Color.h"
 #include <Pistol.h>
 #include "Knife.h"
+#include <Car.h>
 
 void Counter()
 {
@@ -27,6 +28,12 @@ void SomeFunc()
 }
 int main(int argc, char* args[])
 {
+	Car myRide(1988, "Ford", "Mustang GT 5.0");
+	Car futureCar(2026, "Tesla", "Flying Roadster");
+	std::cout << myRide.vehicleInformation() << "\n";
+	std::cout << futureCar.vehicleInformation() << "\n";
+	Car::reporting();//reporting is a static function
+
 	//all of these variables are on the stack section of memory
 	int num = 5;
 	int& rNum = num;
@@ -48,7 +55,7 @@ int main(int argc, char* args[])
 		//every `=new` REQUIRES a `delete`
 		//delete the heap objects when you are done with them
 		delete hNum;
-		delete heapGun;
+		delete heapGun;//calls the destructor
 		heapGun = nullptr;
 	}
 	//pGun->calcDamage();

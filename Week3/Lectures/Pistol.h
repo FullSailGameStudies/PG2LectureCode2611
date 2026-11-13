@@ -12,8 +12,16 @@ public:
 		Weapon(range, damage),
 		mAmmo(ammo),
 		mCapacity(capacity)
-	{
+	{	}
 
+	//destructors:
+	//  named the same as the class
+	//  no return type
+	//  can have only 1 destructor
+	//  there are NO parameters
+	~Pistol()
+	{
+		//release resources that the class is using
 	}
 
 	int calcDamage() override;

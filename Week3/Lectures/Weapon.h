@@ -7,6 +7,9 @@ private:
 
 public:
 	Weapon(int range, int damage);
+	//to NOT-leak objects that are polymorphically destructed
+	//we need a virtual destructor
+	virtual ~Weapon() = default;
 
 	//RUNTIME-polymorphism
 	//STEP 1: mark the base function as `virtual`

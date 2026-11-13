@@ -7,6 +7,7 @@
 #include "Player.h"
 #include "Color.h"
 #include <Pistol.h>
+#include "Knife.h"
 
 void Counter()
 {
@@ -66,10 +67,39 @@ int main(int argc, char* args[])
 	pewpew = pewpew + 5;//pewpew+(5)
 	pewpew = p2;//calls the assignment operator
 
+
 	Pistol* currentGun = &pewpew;
 	//when using pointers to classes, better to use `->` to dereference
 	currentGun->showMe();
 	(*currentGun).showMe();
+
+	//UPCAST:
+	//casting from a derived type (Pistol)
+	//to a base type (Weapon)
+	//ALWAYS safe!!
+	Weapon* currentWeapon = currentGun;
+	currentGun->showMe();
+	currentWeapon->showMe();
+
+	Knife stabby(3, 10, true);
+	currentWeapon = &stabby;
+	currentWeapon->showMe();
+
+	std::vector<Weapon*> inventory;
+	inventory.push_back(&pewpew);//upcasting
+	inventory.push_back(&stabby);//upcasting
+
+	std::cout << "\n\nJohn Wick's Inventory:\n";
+	for (auto& wpn : inventory)
+	{
+		wpn->showMe();//runtime polymorphism
+	}
+	std::cout << "\n\n";
+
+	//DOWNCAST:
+	//casting from a base type (Weapon)
+	//to a derived type (Knife)
+	//NOT SAFE!!!!
 
 	pewpew.showMe();
 

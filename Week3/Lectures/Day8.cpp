@@ -52,6 +52,7 @@ void Day8::PartB_1()
 		engine.Present();
 		bool quit = false;
 		SDL_Event e;
+		BlackjackCard* cardyB = nullptr;
 		while (!quit)
 		{
 			while (SDL_PollEvent(&e) != 0)
@@ -73,9 +74,11 @@ void Day8::PartB_1()
 						//
 						// TODO: Part B-1.2 Create a BlackjackCard object
 						//
-						BlackjackCard cardyB("Q", "Diamonds");
-						std::cout << cardyB.Value() << "\n";
-						cardyB.Print();
+						if(cardyB == nullptr)
+							cardyB = new BlackjackCard("Q", "Diamonds");
+
+						std::cout << cardyB->Value() << "\n";
+						cardyB->Print();
 
 						pos cardSize = GameTextures::CardSize(scale);
 						int x = 5;
@@ -84,9 +87,7 @@ void Day8::PartB_1()
 						//
 						// TODO: Part B-1.3  call GameTextures::RenderImage with the BlackjackCard object
 						//
-						GameTextures::RenderImage(cardyB.GetFace(), cardyB.GetSuit(), x, y);
-
-
+						GameTextures::RenderImage(cardyB->GetFace(), cardyB->GetSuit(), x, y);
 
 
 						//
@@ -136,6 +137,9 @@ void Day8::PartB_1()
 			}
 
 		}
+
+		if (cardyB != nullptr) delete cardyB;
+
 		GameTextures::Cleanup();
 	}
 	engine.Close();

@@ -2,6 +2,11 @@
 #include <iostream>
 
 
+int Pistol::calcDamage()
+{
+	return Weapon::calcDamage();
+}
+
 //RUNTIME-polymorphism
 //STEP 3: add the definition to the derived class
 void Pistol::showMe()

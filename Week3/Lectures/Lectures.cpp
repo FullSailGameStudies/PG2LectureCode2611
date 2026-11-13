@@ -8,14 +8,68 @@
 #include "Color.h"
 #include <Pistol.h>
 
+void Counter()
+{
+	//the creation & initialization happens the first time only
+	static int i = 0;
+	std::cout << i << " ";
+	i++;
+}
+void Other()
+{
+	static int i = 0;
+	std::cout << i << " ";
+}
+void SomeFunc()
+{
+	int secret = rand();
+}
 int main(int argc, char* args[])
 {
-	Pistol pewpew(100,250,15,50);
+	//all of these variables are on the stack section of memory
+	int num = 5;
+	int& rNum = num;
+	int* pNum = &num;
+	std::cout << rNum << "\n";
+	std::cout << pNum << "\n";
+	//dereference the pointer to access the value it points to
+	std::cout << *pNum << "\n";
+
+	Pistol* pGun;
+	{
+		// ` = new` always creates something in the Heap
+		int* hNum = new int(5);
+		std::cout << hNum << "\n";
+
+		Pistol* heapGun = new Pistol(200, 50, 2, 5);
+		pGun = heapGun;
+
+		//every `=new` REQUIRES a `delete`
+		//delete the heap objects when you are done with them
+		delete hNum;
+		delete heapGun;
+		heapGun = nullptr;
+	}
+	//pGun->calcDamage();
+
+
+
+	for (int i = 0; i < 10; i++)
+	{
+		Counter();
+	}
+	Other();
+	Pistol pewpew(100, 250, 15, 50);
 	Pistol p2(100, 250, 5, 50);
 	int ammo = pewpew.Ammo();
 	pewpew = pewpew + p2;//pewpew+(p2)
 	pewpew = pewpew + 5;//pewpew+(5)
 	pewpew = p2;//calls the assignment operator
+
+	Pistol* currentGun = &pewpew;
+	//when using pointers to classes, better to use `->` to dereference
+	currentGun->showMe();
+	(*currentGun).showMe();
 
 	pewpew.showMe();
 
@@ -26,16 +80,16 @@ int main(int argc, char* args[])
 	//EVERY class instance requires a constructor call
 	//p1 is an instance of the Player class
 	Player p1("BruceW", 100);//calls the ctor
-	std::cout << "Player 1: " << 
-		p1.GetName() << " Level: " << 
+	std::cout << "Player 1: " <<
+		p1.GetName() << " Level: " <<
 		p1.Level() << "\n";
 
-    std::string hello = "Hello Week 3!";
-    for (auto& ch : hello)
-    {
-        Console::Write(ch, (ConsoleColor)(rand() % 7 + 1));
-    }
-    std::cout << "\n";
+	std::string hello = "Hello Week 3!";
+	for (auto& ch : hello)
+	{
+		Console::Write(ch, (ConsoleColor)(rand() % 7 + 1));
+	}
+	std::cout << "\n";
 
 	int menuSelection = 0;
 	std::vector<std::string> menuOptions{

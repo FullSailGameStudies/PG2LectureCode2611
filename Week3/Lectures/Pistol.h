@@ -16,6 +16,8 @@ public:
 
 	}
 
+	int calcDamage() override;
+
 	Pistol operator+(Pistol& other)
 	{
 		int ammo = mAmmo + other.mAmmo;

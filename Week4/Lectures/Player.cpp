@@ -16,6 +16,17 @@ void Player::SerializeCSV(std::ofstream& file, char delimiter) const
 	file << worldX << delimiter << worldY;
 }
 
+void Player::DeserializeCSV(const std::string& line, char delimiter)
+{
+	std::stringstream lineStream(line);
+	std::string data;
+	std::getline(lineStream, data, delimiter);
+	worldX = std::stoi(data);
+
+	std::getline(lineStream, data, delimiter);
+	worldY = std::stoi(data);
+}
+
 void Player::Info()
 {
 	Console::SetCursorPosition(0, 12);

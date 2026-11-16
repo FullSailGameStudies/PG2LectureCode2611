@@ -5,6 +5,7 @@
 #include "Input.h"
 #include <filesystem>
 #include <fstream> //fstream, ofstream, ifstream
+#include <sstream> //stringstream
 #include <Player.h>
 
 //give a namespace a new name
@@ -12,9 +13,9 @@ namespace fs = std::filesystem;
 
 void ShowFilesByExtension(const std::string& path, const std::string& ext)
 {
-	for (const auto& entry : fs::directory_iterator(path)) 
+	for (const auto& entry : fs::directory_iterator(path))
 	{
-		if (fs::is_regular_file(entry) && 
+		if (fs::is_regular_file(entry) &&
 			entry.path().extension() == ext)
 		{
 			std::cout << entry.path() << '\n';
@@ -62,6 +63,55 @@ int main(int argc, char* args[])
 	//3) close the file
 	outFile.close();
 
+	//READ the file
+	std::ifstream inFile(finalPath);
+	if (inFile.is_open())
+	{
+		//read the line
+		std::string line;
+		//reads the STREAM until it reaches a \n 
+		//OR the end of the stream
+		std::getline(inFile, line);
+		std::cout << line << "\n";
+
+		//parse the line
+		//convert the string to a STREAM
+		std::stringstream lineStream(line);
+		std::string data;
+		//reads the STREAM until it reaches a delimiter OR
+		//the end of the stream
+		std::getline(lineStream, data, delimiter);
+		std::cout << data << "\n";
+
+		std::getline(lineStream, data, delimiter);
+		int iData = std::stoi(data);
+		std::cout << iData << "\n";
+
+		//lookup try-catch
+		std::getline(lineStream, data, delimiter);
+		try
+		{
+			bool bData = std::stoi(data);
+			std::cout << bData << "\n";
+		}
+		catch (const std::exception&)
+		{
+
+		}
+		std::getline(lineStream, data, delimiter);
+		double dData = std::stod(data);
+		std::cout << dData << "\n";
+
+		std::getline(lineStream, data, delimiter);
+		std::cout << data << "\n";
+	}
+	else
+	{
+		std::cout << finalPath << " could not be opened.\n";
+	}
+	//3) close the file
+	inFile.close();
+
 
 	std::cout << fs::exists(".") << "\n";
 	ShowFilesByExtension(".", ".cpp");
@@ -80,18 +130,22 @@ int main(int argc, char* args[])
 		std::cout << entry.path() << '\n';
 	}
 
-    std::string hello = "Hello Week 4!";
-    for (auto& ch : hello)
-    {
-        Console::Write(ch, (ConsoleColor)(rand() % 7 + 1));
-    }
-    std::cout << "\n";
+	std::string hello = "Hello Week 4!";
+	for (auto& ch : hello)
+	{
+		Console::Write(ch, (ConsoleColor)(rand() % 7 + 1));
+	}
+	std::cout << "\n";
 
 	Player p1;
 	fileName = "playerOne.csv";
 	std::ofstream oFile(fileName);
 	if (oFile.is_open())
 	{
+		p1.SerializeCSV(oFile, '$');
+		oFile << "\n";
+		p1.SerializeCSV(oFile, '$');
+		oFile << "\n";
 		p1.SerializeCSV(oFile, '$');
 	}
 	else
@@ -100,6 +154,26 @@ int main(int argc, char* args[])
 	}
 	//3) close the file
 	oFile.close();
+
+	std::ifstream iFile(fileName);
+	if (iFile.is_open())
+	{
+		std::string line;
+		while (not iFile.eof())//end of file
+		{
+			std::getline(iFile, line);//read the line from the file
+			Player p2(line, '$');
+		}
+	}
+	else
+	{
+		std::cout << fileName << " could not be opened.\n";
+	}
+	//3) close the file
+	iFile.close();
+
+
+
 
 	int menuSelection = 0;
 	std::vector<std::string> menuOptions{

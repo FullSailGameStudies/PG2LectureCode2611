@@ -32,6 +32,8 @@ public:
 		y = worldY;
 	}
 
+	void SerializeCSV(std::ofstream& file, char delimiter) const;
+
 	void Info();
 private:
 	int worldX, worldY;

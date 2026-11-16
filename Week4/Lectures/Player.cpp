@@ -11,6 +11,11 @@
 // Part B-2.2
 //
 
+void Player::SerializeCSV(std::ofstream& file, char delimiter) const
+{
+	file << worldX << delimiter << worldY;
+}
+
 void Player::Info()
 {
 	Console::SetCursorPosition(0, 12);
